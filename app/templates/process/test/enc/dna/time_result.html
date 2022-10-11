@@ -1,0 +1,402 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Charts {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <link href="/static/assets/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+
+{% endblock stylesheets %}
+
+{% block content %}    
+
+  <div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+      <div class="row row-cols-2">
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Key Generation Time Chart
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <canvas id="canvas-1"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Key Generation Time Table
+             
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Algorithm</th>
+                      <th scope="col">Running Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in range(4) %}
+                    <tr>
+                      <th>{{loop.index}}</th>
+                      <td>{{algorithm[loop.index-1]}}</td>
+                      <td>{{result[0][loop.index-1]}} seconds</td>
+                    </tr>
+                    {% endfor %}
+
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Encryption Time Chart
+             
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <canvas id="canvas-2"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Encryption Time Table
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Algorithm</th>
+                      <th scope="col">Running Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in range(4) %}
+                    <tr>
+                      <th>{{loop.index}}</th>
+                      <td>{{algorithm[loop.index-1]}}</td>
+                      <td>{{result[1][loop.index-1]}} seconds</td>
+                    </tr>
+                    {% endfor %}
+
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Decryption Time Chart
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <canvas id="canvas-3"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Decryption Time Table
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Algorithm</th>
+                      <th scope="col">Running Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in range(4) %}
+                    <tr>
+                      <th>{{loop.index}}</th>
+                      <td>{{algorithm[loop.index-1]}}</td>
+                      <td>{{result[2][loop.index-1]}} seconds</td>
+                    </tr>
+                    {% endfor %}
+
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Total Time Chart
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <canvas id="canvas-4"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4">
+            <div class="card-header">Total Time Table
+            </div>
+            <div class="card-body">
+              <div class="c-chart-wrapper">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Algorithm</th>
+                      <th scope="col">Running Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in range(4) %}
+                    <tr>
+                      <th>{{loop.index}}</th>
+                      <td>{{algorithm[loop.index-1]}}</td>
+                      <td>{{result[3][loop.index-1]}} seconds</td>
+                    </tr>
+                    {% endfor %}
+
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <script src="/static/assets/vendors/chart.js/js/chart.min.js"></script>
+  <script src="/static/assets/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+  <script>
+  
+  const chart1 = new Chart(document.getElementById('canvas-1'), {
+    type: 'bar',
+    data: {
+      labels: ["        Running Time"],
+      datasets: [
+      {%set backgroundColor = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+        ]%}
+      {%set borderColor = [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ]%} 
+      {% for i in range(4) %}
+       
+        {
+          label: '{{algorithm[loop.index-1]}}',
+          backgroundColor:  '{{backgroundColor[loop.index-1]}}',
+          borderColor: '{{borderColor[loop.index-1]}}',
+          data :['{{result[0][loop.index-1]|tojson}}'],
+          borderWidth: 1
+        }
+        {% if loop.index < 4 %}
+          ,
+        {% endif %}
+      {% endfor %}
+      ]   
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      scales: {
+            y: {
+                ticks: {
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }
+        }
+    }
+  }); // eslint-disable-next-line no-unused-vars
+  const chart2 = new Chart(document.getElementById('canvas-2'), {
+    type: 'bar',
+    data: {
+      labels: ["        Running Time"],
+      datasets: [
+      {%set backgroundColor = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+        ]%}
+      {%set borderColor = [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ]%} 
+      {% for i in range(4) %}
+       
+        {
+          label: '{{algorithm[loop.index-1]}}',
+          backgroundColor:  '{{backgroundColor[loop.index-1]}}',
+          borderColor: '{{borderColor[loop.index-1]}}',
+          data :['{{result[1][loop.index-1]|tojson}}'],
+          borderWidth: 1
+        }
+        {% if loop.index < 4 %}
+          ,
+        {% endif %}
+      {% endfor %}
+      ]   
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      scales: {
+            y: {
+                ticks: {
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }
+        }
+    }
+  }); // eslint-disable-next-line no-unused-vars
+  const chart3 = new Chart(document.getElementById('canvas-3'), {
+    type: 'bar',
+    data: {
+      labels: ["        Running Time"],
+      datasets: [
+      {%set backgroundColor = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+        ]%}
+      {%set borderColor = [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ]%} 
+      {% for i in range(4) %}
+       
+        {
+          label: '{{algorithm[loop.index-1]}}',
+          backgroundColor:  '{{backgroundColor[loop.index-1]}}',
+          borderColor: '{{borderColor[loop.index-1]}}',
+          data :['{{result[2][loop.index-1]|tojson}}'],
+          borderWidth: 1
+        }
+        {% if loop.index < 4 %}
+          ,
+        {% endif %}
+      {% endfor %}
+      ]   
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      scales: {
+            y: {
+                ticks: {
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }
+        }
+    }
+  }); // eslint-disable-next-line no-unused-vars
+  const chart4 = new Chart(document.getElementById('canvas-4'), {
+    type: 'bar',
+    data: {
+      labels: ["        Running Time"],
+      datasets: [
+      {%set backgroundColor = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+        ]%}
+      {%set borderColor = [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ]%} 
+      {% for i in range(4) %}
+       
+        {
+          label: '{{algorithm[loop.index-1]}}',
+          backgroundColor:  '{{backgroundColor[loop.index-1]}}',
+          borderColor: '{{borderColor[loop.index-1]}}',
+          data :['{{result[3][loop.index-1]|tojson}}'],
+          borderWidth: 1
+        }
+        {% if loop.index < 4 %}
+          ,
+        {% endif %}
+      {% endfor %}
+      ]   
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      scales: {
+            y: {
+                ticks: {
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }
+        }
+    }
+  }); // eslint-disable-next-line no-unused-vars
+  </script>
+
+{% endblock javascripts %}

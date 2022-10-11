@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Colors {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="body flex-grow-1 px-3">
+  <div class="container-lg">
+    <div class="card mb-5">
+      <div class="card-header">DNA Crypt Test</div>
+      <div class="card-body">
+        <div class="row">
+          <form class="was-validated" method="POST" action="" enctype="multipart/form-data" id="form">
+          
+            <div class="form-group">
+                <label for="securityLevel">Security Level</label>
+                <select class="custom-select form-control"name="securityLevel"  required >
+                  <option value="" >Select Security Level</option>
+                  <option value="112">112</option>
+                  <option value="128">128</option>
+                  <option value="192">192</option>
+                  <option value="256">256</option>
+                </select>
+                <div class="invalid-feedback">Select one</div>
+                
+            </div>
+            <div class="form-group">
+                <label for="dnaCover">DNA Cover</label>
+                <select class="custom-select form-control"name="dnaCover"  required >
+                  <option value="" >Select DNA Cover</option>
+                  <option value="1">X98392</option>
+                  <option value="2">MN988668</option>
+                  <option value="3">AC073210.8</option>
+                  <option value="4">NC_045512.2</option>
+                </select>
+                <div class="invalid-feedback">Select one</div>
+                
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <input type="string" class="form-control" name="plaintext" placeholder="Input Message"  required>
+                <div class="invalid-feedback">Input Message</div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit" name="submit">Submit</button>
+        </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- Plugins and scripts required by this view-->
+  <script src="/static/assets/vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="/static/assets/js/colors.js"></script>
+  <script>
+  </script>
+
+{% endblock javascripts %}

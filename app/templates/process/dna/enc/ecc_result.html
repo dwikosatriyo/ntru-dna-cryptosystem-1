@@ -1,0 +1,67 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} EC Crypt {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% set inputVar = ["Key Size","Message"] %}
+{% set resultVar = ["Public Key","Private Key","DNA Plaintext", "Ciphertext","KG(Temporary Key)","Decrypted DNA Ciphertext","Decrypted Ciphertext"] %}
+  <div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-sm-7">
+          <div class="card mb-3">
+            <div class="card-header">INPUT</div>
+            <div class="card-body">
+              <table class="table">
+                <caption>ECC Input</caption>
+                <tbody>
+                  {% for i in inputVar %}
+                    <tr>
+                    <th scope="row">{{i}}</th>
+                    <td>{{inputParameter[loop.index-1]}}</td>
+                    <tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="card mb-3">
+            <div class="card-header">OUTPUT</div>
+            <div class="card-body">
+              <table class="table">
+                <caption>ECC Result</caption>
+                <tbody>
+                  {% for i in resultVar %}
+                  <tr>
+                  <th scope="row">{{i}}</th>
+                  <td>{{result[loop.index-1]}}</td>
+                  <tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- Plugins and scripts required by this view-->
+  <script src="/static/assets/vendors/@coreui/utils/js/coreui-utils.js"></script>
+  <script src="/static/assets/js/colors.js"></script>
+  <script>
+  </script>
+
+{% endblock javascripts %}
